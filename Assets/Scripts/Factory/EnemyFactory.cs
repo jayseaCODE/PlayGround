@@ -8,6 +8,9 @@ public enum EnemyType
     Sniper
 }
 
+/// <summary>
+/// Demonstration of using the Factory pattern with the Prototype pattern
+/// </summary>
 public class EnemyFactory : MonoBehaviour
 {
     private ICopyable copyable;

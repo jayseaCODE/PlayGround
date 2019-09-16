@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Demonstration of the Prototype pattern through copying by either direct object reference
+/// or through prefabs
+/// </summary>
 public class Enemy : MonoBehaviour, ICopyable {
 
     public ICopyable Copy()
