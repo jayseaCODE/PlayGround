@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 1287339896}
   - component: {fileID: 1287339895}
   - component: {fileID: 1287339900}
+  - component: {fileID: 1287339901}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -296,8 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fee3e10bf222254fb14511a92b1b920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drone: {fileID: 5111919509544953408, guid: 9e3db8486dfe0fe489a926ea4a3a6efa, type: 3}
-  sniper: {fileID: 4718629447712373191, guid: 1ff98b7a6f7ef54478902cfcc18077d4, type: 3}
   enemySpawner: {fileID: 1287339900}
 --- !u!64 &1287339896
 MeshCollider:
@@ -382,5 +381,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6993218de5b6484ab5345c5dcc26869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyFactory: {fileID: 1287339901}
+--- !u!114 &1287339901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287339894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3ac2f49a86f8d43b4e5cee724a0f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

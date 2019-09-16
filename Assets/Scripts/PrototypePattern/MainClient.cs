@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MainClient : MonoBehaviour {
 
-    public Drone drone;
-    public Sniper sniper;
     public EnemySpawner enemySpawner;
 
     private Enemy enemy;
@@ -18,7 +16,7 @@ public class MainClient : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            enemy = enemySpawner.SpawnEnemyThroughPrefabs(drone);
+            enemy = enemySpawner.SpawnEnemyThroughPrefabs(EnemyType.Drone);
 
             enemy.name = "Drone_Clone_" + ++incrementorDrone;
             enemy.transform.SetPositionAndRotation(randomPosition, new Quaternion());
@@ -27,7 +25,7 @@ public class MainClient : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            enemy = enemySpawner.SpawnEnemyThroughPrefabs(sniper);
+            enemy = enemySpawner.SpawnEnemyThroughPrefabs(EnemyType.Sniper);
 
             enemy.name = "Sniper_Clone_" + ++incrementorSniper;
             enemy.transform.SetPositionAndRotation(randomPosition, new Quaternion());
