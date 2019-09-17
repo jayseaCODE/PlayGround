@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Drone : Enemy {
 
+    public override void Kill()
+    {
+        Debug.Log("*Flies overhead*");
+    }
+
     public void Fly()
     {
         // Implement flying functionality.
