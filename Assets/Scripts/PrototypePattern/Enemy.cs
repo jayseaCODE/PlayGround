@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 /// Demonstration of the Prototype pattern through copying by either direct object reference
 /// or through prefabs
 /// </summary>
-public class Enemy : MonoBehaviour, ICopyable {
+public class Enemy : MonoBehaviour, ICopyable, IEnemy {
 
     public ICopyable Copy()
     {
@@ -15,6 +16,11 @@ public class Enemy : MonoBehaviour, ICopyable {
     public ICopyable Copy(string name)
     {
         return Instantiate(Resources.Load(name, typeof(Enemy)) as Enemy);
+    }
+
+    public virtual void Kill()
+    {
+        Debug.Log("I am your enemy!");
     }
 
     // Use this for initialization
