@@ -11,10 +11,16 @@ public enum EnemyType
 /// <summary>
 /// Demonstration of using the Factory pattern with the Prototype pattern
 /// </summary>
-public class EnemyFactory : MonoBehaviour
+public class EnemyFactory : AbstractFactory
 {
     private ICopyable copyable;
 
+    public override IAlly GetAlly(AllyType allyType)
+    {
+        return null;
+    }
+
+    /*
     public ICopyable GetEnemy(EnemyType enemyType)
     {
         switch (enemyType)
@@ -26,6 +32,7 @@ public class EnemyFactory : MonoBehaviour
         }
         return null;
     }
+    */
     public ICopyable GetEnemy(Enemy enemy, bool usePrefab = true)
     {
         copyable = null;
@@ -46,5 +53,17 @@ public class EnemyFactory : MonoBehaviour
         }
         
         return copyable as Enemy;
+    }
+
+    public override IEnemy GetEnemy(EnemyType enemyType)
+    {
+        switch (enemyType)
+        {
+            case EnemyType.Drone:
+                return Instantiate(Resources.Load("Drone", typeof(Enemy)) as Enemy);
+            case EnemyType.Sniper:
+                return Instantiate(Resources.Load("Sniper", typeof(Enemy)) as Enemy);
+        }
+        return null;
     }
 }

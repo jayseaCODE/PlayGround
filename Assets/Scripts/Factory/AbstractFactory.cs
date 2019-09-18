@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Interfaces;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class AbstractFactory
+public abstract class AbstractFactory : MonoBehaviour
 {
-    public abstract IEnemy GetEnemy();
+    public abstract IEnemy GetEnemy(EnemyType enemyType);
 
-    public abstract IAlly GetAlly();
+    public abstract IAlly GetAlly(AllyType allyType);
 }
