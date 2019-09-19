@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MainClient : MonoBehaviour {
 
-    public EnemySpawner enemySpawner;
+    public Spawner spawner;
 
-    private Enemy enemy;
+    private MonoBehaviour entity;
     private int incrementorDrone = 0;
     private int incrementorSniper = 0;
+    private int incrementorMedic = 0;
 
     public void Update()
     {
@@ -16,19 +17,30 @@ public class MainClient : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            enemy = enemySpawner.SpawnEnemyThroughPrefabs(EnemyType.Drone);
+            entity = spawner.SpawnEnemy(EnemyType.Drone);
 
-            enemy.name = "Drone_Clone_" + ++incrementorDrone;
-            enemy.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            entity.name = "Drone_Clone_" + ++incrementorDrone;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
             //enemy.transform.position.Set(Random.Range(0, 20), Random.Range(0, 20), Random.Range(0, 20));
+            (entity as IEnemy).Kill();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            enemy = enemySpawner.SpawnEnemyThroughPrefabs(EnemyType.Sniper);
+            entity = spawner.SpawnEnemy(EnemyType.Sniper);
 
-            enemy.name = "Sniper_Clone_" + ++incrementorSniper;
-            enemy.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            entity.name = "Sniper_Clone_" + ++incrementorSniper;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            (entity as IEnemy).Kill();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            entity = spawner.SpawnAlly(AllyType.Medic);
+
+            entity.name = "Medic_Clone_" + ++incrementorMedic;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            (entity as IAlly).Rescue();
         }
     }
 }
