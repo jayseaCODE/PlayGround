@@ -278,6 +278,8 @@ GameObject:
   - component: {fileID: 1287339895}
   - component: {fileID: 1287339900}
   - component: {fileID: 1287339901}
+  - component: {fileID: 1287339903}
+  - component: {fileID: 1287339902}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -297,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fee3e10bf222254fb14511a92b1b920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 1287339900}
+  spawner: {fileID: 1287339900}
 --- !u!64 &1287339896
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -383,7 +385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6993218de5b6484ab5345c5dcc26869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFactory: {fileID: 1287339901}
 --- !u!114 &1287339901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,5 +395,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a3ac2f49a86f8d43b4e5cee724a0f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1287339902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287339894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a91f074bf4f91a342bca07c9d0958343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1287339903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287339894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0749bc057fde1a8488dfe1ccbe6a65c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
