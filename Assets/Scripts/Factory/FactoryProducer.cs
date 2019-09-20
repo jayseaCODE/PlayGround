@@ -8,17 +8,17 @@ public enum FactoryType
     Ally
 }
 
-public class FactoryProducer : MonoBehaviour
+public class FactoryProducer : Singleton<FactoryProducer>
 {
-    public static AbstractFactory GetFactory(FactoryType factoryType)
+    public static IFactory GetFactory(FactoryType factoryType)
     {
         switch (factoryType)
         {
             case FactoryType.Ally:
-                AbstractFactory allyFactory = FindObjectOfType<AllyFactory>();
+                IFactory allyFactory = FindObjectOfType<AllyFactory>();
                 return allyFactory;
             case FactoryType.Enemy:
-                AbstractFactory enemyFactory = FindObjectOfType<EnemyFactory>();
+                IFactory enemyFactory = FindObjectOfType<EnemyFactory>();
                 return enemyFactory;
         }
         return null;
