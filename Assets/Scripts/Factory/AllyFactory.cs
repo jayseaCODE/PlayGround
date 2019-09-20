@@ -9,9 +9,9 @@ using UnityEngine;
     {
         Medic
     }
-public class AllyFactory : AbstractFactory
+public class AllyFactory : Singleton<AllyFactory>, IFactory
 {
-    public override IAlly GetAlly(AllyType allyType)
+    public IAlly GetAlly(AllyType allyType)
     {
         switch (allyType)
         {
@@ -21,7 +21,7 @@ public class AllyFactory : AbstractFactory
         return null;
     }
 
-    public override IEnemy GetEnemy(EnemyType enemyType)
+    public IEnemy GetEnemy(EnemyType enemyType)
     {
         return null;
     }

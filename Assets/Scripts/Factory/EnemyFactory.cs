@@ -11,11 +11,11 @@ public enum EnemyType
 /// <summary>
 /// Demonstration of using the Factory pattern with the Prototype pattern
 /// </summary>
-public class EnemyFactory : AbstractFactory
+public class EnemyFactory :  Singleton<EnemyFactory>, IFactory
 {
     private ICopyable copyable;
 
-    public override IAlly GetAlly(AllyType allyType)
+    public IAlly GetAlly(AllyType allyType)
     {
         return null;
     }
@@ -55,7 +55,7 @@ public class EnemyFactory : AbstractFactory
         return copyable as Enemy;
     }
 
-    public override IEnemy GetEnemy(EnemyType enemyType)
+    public IEnemy GetEnemy(EnemyType enemyType)
     {
         switch (enemyType)
         {
