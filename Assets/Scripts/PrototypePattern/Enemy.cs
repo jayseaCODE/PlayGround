@@ -6,7 +6,7 @@ using UnityEngine;
 /// Demonstration of the Prototype pattern through copying by either direct object reference
 /// or through prefabs
 /// </summary>
-public class Enemy : MonoBehaviour, ICopyable, IEnemy {
+public class Enemy : Unit, ICopyable, IEnemy {
 
     public ICopyable Copy()
     {
@@ -22,9 +22,15 @@ public class Enemy : MonoBehaviour, ICopyable, IEnemy {
         Debug.Log("I am your enemy!");
     }
 
+    void Awake()
+    {
+        // Default unit behavior for an Enemy
+        this.unitBehavior = new Patrol();
+    }
+
     // Use this for initialization
     void Start () {
-		
+        this.ApplyBehavior();
 	}
 	
 	// Update is called once per frame
