@@ -56,33 +56,39 @@ public class MainClient : MonoBehaviour {
             (entity as IAlly).Rescue();
         }
 
-        if (characterController.isGrounded)
+        if (!object.Equals(characterController, null))
         {
-            // We are grounded, so recalculate
-            // move direction directly from axes
-
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-            moveDirection *= speed;
-
-            if (Input.GetButton("Jump"))
+            if (characterController.isGrounded)
             {
-                moveDirection.y = jumpSpeed;
+                // We are grounded, so recalculate
+                // move direction directly from axes
+
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                moveDirection *= speed;
+
+                if (Input.GetButton("Jump"))
+                {
+                    moveDirection.y = jumpSpeed;
+                }
             }
+
+            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+            // as an acceleration (ms^-2)
+            moveDirection.y -= gravity * Time.deltaTime;
+
+            // Move the controller
+            characterController.Move(moveDirection * Time.deltaTime);
         }
-
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
-        moveDirection.y -= gravity * Time.deltaTime;
-
-        // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
     }
 
     private void LateUpdate()
     {
-        Camera mainCamera = Camera.main;
-        mainCamera.transform.position = playerEntity.transform.position + cameraOffSet;
+        if (!object.Equals(playerEntity, null))
+        {
+            Camera mainCamera = Camera.main;
+            mainCamera.transform.position = playerEntity.transform.position + cameraOffSet;
+        }
     }
 
 
