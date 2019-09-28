@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MainClient : MonoBehaviour {
@@ -15,7 +16,7 @@ public class MainClient : MonoBehaviour {
 
     #region Camera
     private Camera activeCamera;
-    private Camera[] cameras;
+    private List<Camera> cameras;
     private Vector3 cameraOffSet = new Vector3(0, 1, -2);
     #endregion
 
@@ -26,6 +27,17 @@ public class MainClient : MonoBehaviour {
     private float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
     #endregion
+
+    public void Start()
+    {
+        cameras = new List<Camera>(Camera.allCameras);
+        activeCamera = Camera.main;
+        foreach (Camera camera in cameras)
+        {
+            camera.enabled = false;
+        }
+        activeCamera.enabled = true;
+    }
 
     public void Update()
     {
@@ -63,6 +75,11 @@ public class MainClient : MonoBehaviour {
             (entity as IAlly).Rescue();
         }
 
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            ToggleToNextCamera();
+        }
+
         if (!object.Equals(characterController, null))
         {
             if (characterController.isGrounded)
@@ -98,7 +115,14 @@ public class MainClient : MonoBehaviour {
         }
     }
 
-
+    private void ToggleToNextCamera()
+    {
+        var prevCamera = activeCamera;
+        var indexOfCurrentCamera = cameras.FindIndex(camera => camera.enabled == true);
+        (cameras[indexOfCurrentCamera]).enabled = false;
+        int indexOfNextCamera = (indexOfCurrentCamera + 1) % (cameras.Count);
+        (cameras[indexOfNextCamera]).enabled = true;
+    }
     private void AttachCharacterController(MonoBehaviour entity)
     {
         if (!doesPlayerHaveAnEntity)
