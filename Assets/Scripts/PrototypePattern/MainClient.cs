@@ -6,7 +6,6 @@ public class MainClient : MonoBehaviour {
 
     public Spawner spawner;
 
-    private Vector3 cameraOffSet = new Vector3(0, 1, -2);
     private bool doesPlayerHaveAnEntity;
     private MonoBehaviour playerEntity;
     private MonoBehaviour entity;
@@ -14,17 +13,25 @@ public class MainClient : MonoBehaviour {
     private int incrementorSniper = 0;
     private int incrementorMedic = 0;
 
+    #region Camera
+    private Camera activeCamera;
+    private Camera[] cameras;
+    private Vector3 cameraOffSet = new Vector3(0, 1, -2);
+    #endregion
+
+    #region Player Character Control
     private CharacterController characterController;
     private float speed = 6.0f;
     private float jumpSpeed = 8.0f;
     private float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
+    #endregion
 
     public void Update()
     {
         Vector3 randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             entity = spawner.SpawnEnemy(EnemyType.Drone);
             AttachCharacterController(entity);
@@ -36,7 +43,7 @@ public class MainClient : MonoBehaviour {
             (entity as IEnemy).Kill();
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             entity = spawner.SpawnEnemy(EnemyType.Sniper);
             AttachCharacterController(entity);
@@ -46,7 +53,7 @@ public class MainClient : MonoBehaviour {
             (entity as IEnemy).Kill();
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             entity = spawner.SpawnAlly(AllyType.Medic);
             AttachCharacterController(entity);
