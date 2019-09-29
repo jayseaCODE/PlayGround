@@ -6,13 +6,13 @@ using UnityEngine;
 /// Demonstration of the Prototype pattern through copying by either direct object reference
 /// or through prefabs
 /// </summary>
-public class Enemy : Unit, ICopyable, IEnemy {
+public class Enemy : Unit, IEnemy {
 
     public ICopyable Copy()
     {
         return Instantiate(this);
     }
-    public ICopyable Copy(string name)
+    public override ICopyable Copy(string name)
     {
         return Instantiate(Resources.Load(name, typeof(Enemy)) as Enemy);
     }

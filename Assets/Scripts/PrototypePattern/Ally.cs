@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Ally : Unit, ICopyable, IAlly
+public class Ally : Unit, IAlly
 {
-    public ICopyable Copy(string name)
+    public override ICopyable Copy(string name)
     {
         return Instantiate(Resources.Load(name, typeof(Ally)) as Ally);
     }
