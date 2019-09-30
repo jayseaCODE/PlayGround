@@ -7,7 +7,12 @@ using UnityEngine;
 
     public class Medic : Ally
     {
-        public override void Rescue()
+    public override ICopyable Copy()
+    {
+        return Instantiate(Resources.Load("Medic", typeof(Ally)) as Ally);
+    }
+
+    public override void Rescue()
         {
             Debug.Log("Medic is here. You will be alright, son.");
         }

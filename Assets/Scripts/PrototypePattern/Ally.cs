@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Ally : Unit, IAlly
+public abstract class Ally : Unit, IAlly
 {
     public override ICopyable Copy(string name)
     {
