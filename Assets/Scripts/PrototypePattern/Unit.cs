@@ -14,6 +14,10 @@ public abstract class Unit : MonoBehaviour, ICopyable
         unitBehavior.Command();
     }
 
+    public virtual ICopyable Copy()
+    {
+        return null;
+    }
     public abstract ICopyable Copy(string name);
 
     public void SetBehavior(IUnitBehavior behavior)
