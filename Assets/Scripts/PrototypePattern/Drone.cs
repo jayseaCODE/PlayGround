@@ -18,4 +18,9 @@ public class Drone : Enemy {
     {
         // Implement laser fire functionality.
     }
+
+    public override ICopyable Copy()
+    {
+        return Instantiate(Resources.Load("Drone", typeof(Enemy)) as Enemy);
+    }
 }
