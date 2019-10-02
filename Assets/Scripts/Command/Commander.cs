@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class Commander
 {
-    protected Stack<UnitCommand> unitCommandsToExecute;
-    protected Stack<UnitCommand> unitCommandsExecuted;
+    protected Queue<UnitCommand> unitCommandsToExecute;
+    protected Queue<UnitCommand> unitCommandsExecuted;
 
     public void SetUnitCommand(UnitCommand unitCommand)
     {
-        unitCommandsToExecute.Push(unitCommand);
+        unitCommandsToExecute.Enqueue(unitCommand);
     }
 
     public void ExecuteUnitCommand()
     {
-        UnitCommand unitCommand = unitCommandsToExecute.Pop();
+        UnitCommand unitCommand = unitCommandsToExecute.Dequeue();
         unitCommand.Execute();
-        unitCommandsExecuted.Push(unitCommand);
+        unitCommandsExecuted.Enqueue(unitCommand);
+    }
+
+    public void ExecuteAllUnitCommands()
+    {
+        while (unitCommandsToExecute.Count > 0)
+        {
+            ExecuteUnitCommand();
+        }
     }
 }
