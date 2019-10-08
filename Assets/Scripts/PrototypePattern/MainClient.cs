@@ -28,6 +28,11 @@ public class MainClient : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     #endregion
 
+    #region Commander
+    private bool UseCommander;
+    private Commander commander;
+    #endregion
+
     public void Start()
     {
         cameras = new List<Camera>(Camera.allCameras);
@@ -43,16 +48,27 @@ public class MainClient : MonoBehaviour {
     {
         Vector3 randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
 
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            UseCommander = !UseCommander;
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            entity = spawner.SpawnEnemy(EnemyType.Drone);
-            AttachCharacterController(entity);
+            if (UseCommander)
+            {
+                commander.SetUnitCommand(new CreateUnitCommand(new Drone()));
+            }
+            else
+            {
+                entity = spawner.SpawnEnemy(EnemyType.Drone);
+                AttachCharacterController(entity);
 
-
-            entity.name = "Drone_Clone_" + ++incrementorDrone;
-            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-            //enemy.transform.position.Set(Random.Range(0, 20), Random.Range(0, 20), Random.Range(0, 20));
-            (entity as IEnemy).Kill();
+                entity.name = "Drone_Clone_" + ++incrementorDrone;
+                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+                //enemy.transform.position.Set(Random.Range(0, 20), Random.Range(0, 20), Random.Range(0, 20));
+                (entity as IEnemy).Kill();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -78,6 +94,11 @@ public class MainClient : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             ToggleToNextCamera();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            commander.ExecuteAllUnitCommands();
         }
 
         if (!object.Equals(characterController, null))
