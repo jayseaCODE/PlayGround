@@ -7,6 +7,12 @@ public class Commander
     protected Queue<UnitCommand> unitCommandsToExecute;
     protected Queue<UnitCommand> unitCommandsExecuted;
 
+    public Commander()
+    {
+        unitCommandsToExecute = new Queue<UnitCommand>();
+        unitCommandsExecuted = new Queue<UnitCommand>();
+    }
+
     public void SetUnitCommand(UnitCommand unitCommand)
     {
         unitCommandsToExecute.Enqueue(unitCommand);

@@ -31,6 +31,7 @@ public class MainClient : MonoBehaviour {
     #region Commander
     private bool UseCommander;
     private Commander commander;
+    private Drone DroneCloneSource;
     #endregion
 
     public void Start()
@@ -42,6 +43,8 @@ public class MainClient : MonoBehaviour {
             camera.enabled = false;
         }
         activeCamera.enabled = true;
+
+        commander = new Commander();
     }
 
     public void Update()
