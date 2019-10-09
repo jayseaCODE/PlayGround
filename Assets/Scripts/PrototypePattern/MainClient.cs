@@ -61,7 +61,13 @@ public class MainClient : MonoBehaviour {
         {
             if (UseCommander)
             {
-                commander.SetUnitCommand(new CreateUnitCommand(new Drone()));
+                if (object.Equals(DroneCloneSource, null))
+                {
+                    DroneCloneSource = spawner.SpawnEnemy(EnemyType.Drone) as Drone;
+                    DroneCloneSource.name = "Drone_SourceCloneForCommander";
+                    DroneCloneSource.gameObject.SetActive(false);
+                }
+                commander.SetUnitCommand(new CreateDroneCommand(DroneCloneSource));
             }
             else
             {
