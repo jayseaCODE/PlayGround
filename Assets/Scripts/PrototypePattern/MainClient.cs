@@ -54,6 +54,7 @@ public class MainClient : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             UseCommander = !UseCommander;
+            Debug.Log($"Use Commander: {UseCommander.ToString()}");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
