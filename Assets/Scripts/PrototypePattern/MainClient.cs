@@ -68,6 +68,7 @@ public class MainClient : MonoBehaviour {
                     DroneCloneSource.gameObject.SetActive(false);
                 }
                 commander.SetUnitCommand(new CreateDroneCommand(DroneCloneSource));
+                Debug.Log("Create Drone Command - Added");
             }
             else
             {
