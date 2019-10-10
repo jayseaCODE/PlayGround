@@ -112,7 +112,7 @@ public class MainClient : MonoBehaviour {
             commander.ExecuteAllUnitCommands();
         }
 
-        if (!object.Equals(characterController, null))
+        if (characterController != null)
         {
             if (characterController.isGrounded)
             {
@@ -140,7 +140,7 @@ public class MainClient : MonoBehaviour {
 
     private void LateUpdate()
     {
-        if (!object.Equals(playerEntity, null))
+        if (playerEntity != null)
         {
             Camera mainCamera = Camera.main;
             mainCamera.transform.position = playerEntity.transform.position + cameraOffSet;
