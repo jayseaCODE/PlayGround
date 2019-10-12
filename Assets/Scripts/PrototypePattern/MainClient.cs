@@ -136,6 +136,10 @@ public class MainClient : MonoBehaviour {
             // Move the controller
             characterController.Move(moveDirection * Time.deltaTime);
         }
+        else
+        {
+            doesPlayerHaveAnEntity = false;
+        }
     }
 
     private void LateUpdate()
