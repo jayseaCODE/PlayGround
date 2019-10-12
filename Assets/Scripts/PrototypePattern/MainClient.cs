@@ -32,6 +32,7 @@ public class MainClient : MonoBehaviour {
     private bool UseCommander;
     private Commander commander;
     private Drone DroneCloneSource;
+    private Sniper SniperCloneSource;
     #endregion
 
     public void Start()
@@ -77,19 +78,32 @@ public class MainClient : MonoBehaviour {
 
                 entity.name = "Drone_Clone_" + ++incrementorDrone;
                 entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-                //enemy.transform.position.Set(Random.Range(0, 20), Random.Range(0, 20), Random.Range(0, 20));
                 (entity as IEnemy).Kill();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            entity = spawner.SpawnEnemy(EnemyType.Sniper);
-            AttachCharacterController(entity);
+            if (UseCommander)
+            {
+                if (object.Equals(SniperCloneSource, null))
+                {
+                    SniperCloneSource = spawner.SpawnEnemy(EnemyType.Sniper) as Sniper;
+                    SniperCloneSource.name = "Sniper_SourceCloneForCommander";
+                    SniperCloneSource.gameObject.SetActive(false);
+                }
+                commander.SetUnitCommand(new CreateSniperCommand(SniperCloneSource));
+                Debug.Log("Create Sniper Command - Added");
+            }
+            else
+            {
+                entity = spawner.SpawnEnemy(EnemyType.Sniper);
+                AttachCharacterController(entity);
 
-            entity.name = "Sniper_Clone_" + ++incrementorSniper;
-            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-            (entity as IEnemy).Kill();
+                entity.name = "Sniper_Clone_" + ++incrementorSniper;
+                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+                (entity as IEnemy).Kill();
+            }            
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
