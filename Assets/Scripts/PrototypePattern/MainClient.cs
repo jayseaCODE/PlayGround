@@ -173,9 +173,9 @@ public class MainClient : MonoBehaviour {
 
     private void LateUpdate()
     {
-        if (playerEntity != null)
+        Camera mainCamera = Camera.main;
+        if ((playerEntity != null ) && (mainCamera != null))
         {
-            Camera mainCamera = Camera.main;
             mainCamera.transform.position = playerEntity.transform.position + cameraOffSet;
         }
     }
