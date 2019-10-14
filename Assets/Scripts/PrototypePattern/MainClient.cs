@@ -33,6 +33,7 @@ public class MainClient : MonoBehaviour {
     private Commander commander;
     private Drone DroneCloneSource;
     private Sniper SniperCloneSource;
+    private Medic MedicCloneSource;
     #endregion
 
     public void Start()
@@ -108,12 +109,26 @@ public class MainClient : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            entity = spawner.SpawnAlly(AllyType.Medic);
-            AttachCharacterController(entity);
+            if (UseCommander)
+            {
+                if (object.Equals(MedicCloneSource, null))
+                {
+                    MedicCloneSource = spawner.SpawnAlly(AllyType.Medic) as Medic;
+                    MedicCloneSource.name = "Medic_SourceCloneForCommander";
+                    MedicCloneSource.gameObject.SetActive(false);
+                }
+                commander.SetUnitCommand(new CreateMedicCommand(MedicCloneSource));
+                Debug.Log("Create Medic Command - Added");
+            }
+            else
+            {
+                entity = spawner.SpawnAlly(AllyType.Medic);
+                AttachCharacterController(entity);
 
-            entity.name = "Medic_Clone_" + ++incrementorMedic;
-            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-            (entity as IAlly).Rescue();
+                entity.name = "Medic_Clone_" + ++incrementorMedic;
+                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+                (entity as IAlly).Rescue();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.BackQuote))
