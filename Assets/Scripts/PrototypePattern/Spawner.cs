@@ -2,16 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : Singleton<Spawner>
+{
+    IFactory _allyFactory;
+    IFactory _enemyFactory;
+    bool _searchedForEnemyFactory;
+    bool _searchedForAllyFactory;
+    public Spawner()
+    {
+        _searchedForEnemyFactory = false;
+        _searchedForAllyFactory = false;
+    }
     public Enemy SpawnEnemy(EnemyType enemyType)
     {
-        var factory = FactoryProducer.GetFactory(FactoryType.Enemy);
-        return factory.GetEnemy(enemyType) as Enemy;
+        if (!_searchedForEnemyFactory)
+        {
+            _enemyFactory = FindObjectOfType<EnemyFactory>();
+            _searchedForEnemyFactory = true;
+        }
+        if (_enemyFactory == null)
+        {
+            _enemyFactory = gameObject.AddComponent(typeof(EnemyFactory)) as EnemyFactory;
+        }
+
+        return _enemyFactory.GetEnemy(enemyType) as Enemy;
     }
 
     public Ally SpawnAlly(AllyType allyType)
     {
-        var factory = FactoryProducer.GetFactory(FactoryType.Ally);
-        return factory.GetAlly(allyType) as Ally;
+        if (!_searchedForAllyFactory)
+        {
+            _allyFactory = FindObjectOfType<AllyFactory>();
+            _searchedForAllyFactory = true;
+        }
+        if (_allyFactory == null)
+        {
+            _allyFactory = gameObject.AddComponent(typeof(AllyFactory)) as AllyFactory;
+        }
+        return _allyFactory.GetAlly(allyType) as Ally;
     }
 }
