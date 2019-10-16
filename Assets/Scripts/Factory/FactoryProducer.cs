@@ -16,9 +16,21 @@ public class FactoryProducer : Singleton<FactoryProducer>
         {
             case FactoryType.Ally:
                 IFactory allyFactory = FindObjectOfType<AllyFactory>();
+                if (allyFactory == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = "AllyFactory";
+                    allyFactory = obj.AddComponent<AllyFactory>();
+                }
                 return allyFactory;
             case FactoryType.Enemy:
                 IFactory enemyFactory = FindObjectOfType<EnemyFactory>();
+                if (enemyFactory == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = "EnemyFactory";
+                    enemyFactory = obj.AddComponent<EnemyFactory>();
+                }
                 return enemyFactory;
         }
         return null;
