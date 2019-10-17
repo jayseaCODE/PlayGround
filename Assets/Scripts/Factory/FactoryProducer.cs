@@ -15,21 +15,21 @@ public class FactoryProducer : Singleton<FactoryProducer>
         switch (factoryType)
         {
             case FactoryType.Ally:
-                IFactory allyFactory = FindObjectOfType<AllyFactory>();
+                IFactory allyFactory = FindObjectOfType<AllyFactoryNonSingleton>();
                 if (allyFactory == null)
                 {
                     GameObject obj = new GameObject();
                     obj.name = "AllyFactory";
-                    allyFactory = obj.AddComponent<AllyFactory>();
+                    allyFactory = obj.AddComponent<AllyFactoryNonSingleton>();
                 }
                 return allyFactory;
             case FactoryType.Enemy:
-                IFactory enemyFactory = FindObjectOfType<EnemyFactory>();
+                IFactory enemyFactory = FindObjectOfType<EnemyFactoryNonSingleton>();
                 if (enemyFactory == null)
                 {
                     GameObject obj = new GameObject();
                     obj.name = "EnemyFactory";
-                    enemyFactory = obj.AddComponent<EnemyFactory>();
+                    enemyFactory = obj.AddComponent<EnemyFactoryNonSingleton>();
                 }
                 return enemyFactory;
         }
