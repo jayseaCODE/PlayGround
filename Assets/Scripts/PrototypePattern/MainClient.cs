@@ -10,6 +10,7 @@ public class MainClient : MonoBehaviour {
     private bool doesPlayerHaveAnEntity;
     private MonoBehaviour playerEntity;
     private MonoBehaviour entity;
+    private Vector3 randomPosition;
     private int incrementorDrone = 0;
     private int incrementorSniper = 0;
     private int incrementorMedic = 0;
@@ -51,8 +52,6 @@ public class MainClient : MonoBehaviour {
 
     public void Update()
     {
-        Vector3 randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
-
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             UseCommander = !UseCommander;
@@ -61,74 +60,17 @@ public class MainClient : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (UseCommander)
-            {
-                if (object.Equals(DroneCloneSource, null))
-                {
-                    DroneCloneSource = spawner.SpawnEnemy(EnemyType.Drone) as Drone;
-                    DroneCloneSource.name = "Drone_SourceCloneForCommander";
-                    DroneCloneSource.gameObject.SetActive(false);
-                }
-                commander.SetUnitCommand(new CreateDroneCommand(DroneCloneSource));
-                Debug.Log("Create Drone Command - Added");
-            }
-            else
-            {
-                entity = spawner.SpawnEnemy(EnemyType.Drone);
-                AttachCharacterController(entity);
-
-                entity.name = "Drone_Clone_" + ++incrementorDrone;
-                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-                (entity as IEnemy).Kill();
-            }
+            SpawnDrone();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (UseCommander)
-            {
-                if (object.Equals(SniperCloneSource, null))
-                {
-                    SniperCloneSource = spawner.SpawnEnemy(EnemyType.Sniper) as Sniper;
-                    SniperCloneSource.name = "Sniper_SourceCloneForCommander";
-                    SniperCloneSource.gameObject.SetActive(false);
-                }
-                commander.SetUnitCommand(new CreateSniperCommand(SniperCloneSource));
-                Debug.Log("Create Sniper Command - Added");
-            }
-            else
-            {
-                entity = spawner.SpawnEnemy(EnemyType.Sniper);
-                AttachCharacterController(entity);
-
-                entity.name = "Sniper_Clone_" + ++incrementorSniper;
-                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-                (entity as IEnemy).Kill();
-            }            
+            SpawnSniper();            
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (UseCommander)
-            {
-                if (object.Equals(MedicCloneSource, null))
-                {
-                    MedicCloneSource = spawner.SpawnAlly(AllyType.Medic) as Medic;
-                    MedicCloneSource.name = "Medic_SourceCloneForCommander";
-                    MedicCloneSource.gameObject.SetActive(false);
-                }
-                commander.SetUnitCommand(new CreateMedicCommand(MedicCloneSource));
-                Debug.Log("Create Medic Command - Added");
-            }
-            else
-            {
-                entity = spawner.SpawnAlly(AllyType.Medic);
-                AttachCharacterController(entity);
-
-                entity.name = "Medic_Clone_" + ++incrementorMedic;
-                entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
-                (entity as IAlly).Rescue();
-            }
+            SpawnMedic();
         }
 
         if (Input.GetKeyDown(KeyCode.BackQuote))
@@ -180,6 +122,78 @@ public class MainClient : MonoBehaviour {
         }
     }
 
+    private void SpawnDrone()
+    {
+        randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
+        if (UseCommander)
+        {
+            if (object.Equals(DroneCloneSource, null))
+            {
+                DroneCloneSource = spawner.SpawnEnemy(EnemyType.Drone) as Drone;
+                DroneCloneSource.name = "Drone_SourceCloneForCommander";
+                DroneCloneSource.gameObject.SetActive(false);
+            }
+            commander.SetUnitCommand(new CreateDroneCommand(DroneCloneSource));
+            Debug.Log("Create Drone Command - Added");
+        }
+        else
+        {
+            entity = spawner.SpawnEnemy(EnemyType.Drone);
+            AttachCharacterController(entity);
+
+            entity.name = "Drone_Clone_" + ++incrementorDrone;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            (entity as IEnemy).Kill();
+        }
+    }
+    private void SpawnSniper()
+    {
+        randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
+        if (UseCommander)
+        {
+            if (object.Equals(SniperCloneSource, null))
+            {
+                SniperCloneSource = spawner.SpawnEnemy(EnemyType.Sniper) as Sniper;
+                SniperCloneSource.name = "Sniper_SourceCloneForCommander";
+                SniperCloneSource.gameObject.SetActive(false);
+            }
+            commander.SetUnitCommand(new CreateSniperCommand(SniperCloneSource));
+            Debug.Log("Create Sniper Command - Added");
+        }
+        else
+        {
+            entity = spawner.SpawnEnemy(EnemyType.Sniper);
+            AttachCharacterController(entity);
+
+            entity.name = "Sniper_Clone_" + ++incrementorSniper;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            (entity as IEnemy).Kill();
+        }
+    }
+    private void SpawnMedic()
+    {
+        randomPosition = new Vector3(Random.Range(-10, 10), Random.Range(5, 20), Random.Range(-10, 10));
+        if (UseCommander)
+        {
+            if (object.Equals(MedicCloneSource, null))
+            {
+                MedicCloneSource = spawner.SpawnAlly(AllyType.Medic) as Medic;
+                MedicCloneSource.name = "Medic_SourceCloneForCommander";
+                MedicCloneSource.gameObject.SetActive(false);
+            }
+            commander.SetUnitCommand(new CreateMedicCommand(MedicCloneSource));
+            Debug.Log("Create Medic Command - Added");
+        }
+        else
+        {
+            entity = spawner.SpawnAlly(AllyType.Medic);
+            AttachCharacterController(entity);
+
+            entity.name = "Medic_Clone_" + ++incrementorMedic;
+            entity.transform.SetPositionAndRotation(randomPosition, new Quaternion());
+            (entity as IAlly).Rescue();
+        }
+    }
     private void ToggleToNextCamera()
     {
         var prevCamera = activeCamera;
