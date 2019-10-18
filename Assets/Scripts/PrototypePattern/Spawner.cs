@@ -10,34 +10,42 @@ enum CreationalPatterns
 
 public class Spawner : Singleton<Spawner>
 {
-    CreationalPatterns CreationalPatternToUse;
+    CreationalPatterns _creationalPatternToUse;
+    IFactory _enemyFactory;
+    IFactory _allyFactory;
 
     public Spawner()
     {
-        CreationalPatternToUse = CreationalPatterns.Factory;
+        _creationalPatternToUse = CreationalPatterns.Factory;
     }
     public Enemy SpawnEnemy(EnemyType enemyType)
     {
-        switch (CreationalPatternToUse)
+        switch (_creationalPatternToUse)
         {
             case CreationalPatterns.Singleton:
                 return EnemyFactory.Instance.GetEnemy(enemyType) as Enemy;
             case CreationalPatterns.Factory:
-                var factory = FactoryProducer.GetFactory(FactoryType.Enemy);
-                return factory.GetEnemy(enemyType) as Enemy;
+                if (_enemyFactory == null)
+                {
+                    _enemyFactory = FactoryProducer.GetFactory(FactoryType.Enemy);
+                }
+                return _enemyFactory?.GetEnemy(enemyType) as Enemy;
         }
         return null;
     }
 
     public Ally SpawnAlly(AllyType allyType)
     {
-        switch (CreationalPatternToUse)
+        switch (_creationalPatternToUse)
         {
             case CreationalPatterns.Singleton:
                 return AllyFactory.Instance.GetAlly(allyType) as Ally;
             case CreationalPatterns.Factory:
-                var factory = FactoryProducer.GetFactory(FactoryType.Ally);
-                return factory.GetAlly(allyType) as Ally;
+                if (_allyFactory == null)
+                {
+                    _allyFactory = FactoryProducer.GetFactory(FactoryType.Ally);
+                }
+                return _allyFactory?.GetAlly(allyType) as Ally;
         }
         return null;
     }
