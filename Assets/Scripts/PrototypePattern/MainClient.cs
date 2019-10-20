@@ -37,6 +37,8 @@ public class MainClient : MonoBehaviour {
     private Medic MedicCloneSource;
     #endregion
 
+    Timer timer;
+
     public void Start()
     {
         cameras = new List<Camera>(Camera.allCameras);
@@ -48,6 +50,13 @@ public class MainClient : MonoBehaviour {
         activeCamera.enabled = true;
 
         commander = new Commander();
+
+        // Execute Observer pattern in Timer class
+        Timer.OnTimeToSpawnAllies += SpawnMedic;
+        Timer.OnTimeToSpawnEnemies += SpawnDrone;
+        Timer.OnTimeToSpawnEnemies += SpawnSniper;
+        timer = gameObject.AddComponent<Timer>();
+
     }
 
     public void Update()
