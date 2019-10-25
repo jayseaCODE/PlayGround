@@ -10,6 +10,6 @@ public class CollidedUnitState : IUnitState
     /// <param name="unit"></param>
     public void Execute(Unit unit)
     {
-        //TODO Define Collided state behavior
+        unit.gameObject.AddComponent<Blink>();
     }
 }
