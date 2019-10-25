@@ -8,6 +8,15 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour, ICopyable
 {
     protected IUnitBehavior unitBehavior;
+    protected IUnitState unitState;
+
+    #region Prototype creational pattern basic setup
+    public virtual ICopyable Copy()
+    {
+        return null;
+    }
+    public abstract ICopyable Copy(string name);
+    #endregion
 
     #region Strategy behavioural pattern implementation
     public void SetBehavior(IUnitBehavior behavior)
@@ -20,9 +29,7 @@ public abstract class Unit : MonoBehaviour, ICopyable
     }
     #endregion
 
-    public virtual ICopyable Copy()
-    {
-        return null;
-    }
-    public abstract ICopyable Copy(string name);
+    #region State behavioural pattern implementation
+
+    #endregion
 }
