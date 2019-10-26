@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3814603612918983141}
   - component: {fileID: 7241160950502159254}
   - component: {fileID: 4746967882001938564}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Medic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
