@@ -30,6 +30,13 @@ public abstract class Unit : MonoBehaviour, ICopyable
     #endregion
 
     #region State behavioural pattern implementation
-
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 10) // Layer "Entities"
+        {
+            unitState = new CollidedUnitState();
+            unitState.Execute(this);
+        }
+    }
     #endregion
 }

@@ -10,6 +10,9 @@ public class CollidedUnitState : IUnitState
     /// <param name="unit"></param>
     public void Execute(Unit unit)
     {
-        unit.gameObject.AddComponent<Blink>();
+        if (unit.gameObject.GetComponent<Blink>() == null)
+        {
+            unit.gameObject.AddComponent<Blink>();
+        }        
     }
 }
