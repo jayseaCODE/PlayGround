@@ -13,7 +13,7 @@ public class Blink : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
-        oldColor = renderer.material.color;
+        oldColor = (renderer.material).GetColor("_Color"); // Custom property from Dissolve shader used in Material DissolveRed/DissolveBlue
     }
 
     // Update is called once per frame
