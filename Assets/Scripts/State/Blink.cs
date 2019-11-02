@@ -28,7 +28,6 @@ public class Blink : MonoBehaviour
         else
         {
             renderer.material.color = oldColor;
-            Destroy(this);
         }
     }
 }
