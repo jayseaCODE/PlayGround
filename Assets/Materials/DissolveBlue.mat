@@ -21,5 +21,8 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - Boolean_F7F660E3: 0
+    - _Animate: 0
+    - _StartTime: 0
     m_Colors:
     - Color_417CBB71: {r: 0, g: 0, b: 1, a: 0}
+    - _Color: {r: 0, g: 0, b: 1, a: 0}
