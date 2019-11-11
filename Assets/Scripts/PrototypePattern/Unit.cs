@@ -38,5 +38,10 @@ public abstract class Unit : MonoBehaviour, ICopyable
             unitState.Execute(this);
         }
     }
+    public void OnTriggerDyingUnitState()
+    {
+        unitState = new DyingUnitState();
+        unitState.Execute(this);
+    }
     #endregion
 }

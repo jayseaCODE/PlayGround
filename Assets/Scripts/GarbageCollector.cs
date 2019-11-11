@@ -11,6 +11,7 @@ public class GarbageCollector : MonoBehaviour
     {
         if (other.gameObject.layer == 10) // Layer "Entities"
         {
+            (other.gameObject.GetComponent<Unit>()).OnTriggerDyingUnitState();
         }
         StartCoroutine(DelayBeforeDestroyingOtherObject(other.gameObject));
     }
