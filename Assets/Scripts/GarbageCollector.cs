@@ -9,14 +9,13 @@ public class GarbageCollector : MonoBehaviour
     // Destroy everything that enters the trigger
     void OnTriggerEnter(Collider other)
     {
-        // Custom property from Dissolve shader used in Material DissolveRed/DissolveBlue
-        renderer = other.gameObject.GetComponent<Renderer>();
-        renderer.material.SetFloat("_StartTime", Mathf.Sin(Time.time));
-        renderer.material.SetFloat("_Animate", 1.0f);
-        StartCoroutine(Delay(other.gameObject));
+        if (other.gameObject.layer == 10) // Layer "Entities"
+        {
+        }
+        StartCoroutine(DelayBeforeDestroyingOtherObject(other.gameObject));
     }
 
-    IEnumerator Delay(GameObject gameObject)
+    IEnumerator DelayBeforeDestroyingOtherObject(GameObject gameObject)
     {
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
